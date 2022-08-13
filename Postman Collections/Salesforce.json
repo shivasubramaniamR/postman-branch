@@ -608,7 +608,8 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects"
 			},
 			"response": []
 		}
