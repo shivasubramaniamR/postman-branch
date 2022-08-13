@@ -1,0 +1,637 @@
+{
+	"info": {
+		"_postman_id": "554aa77f-dd7d-4d6f-8c14-a16ba8cb56a2",
+		"name": "Salesforce_July2022",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "Create Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "404d986f-511a-4ca7-9ff0-1130c503ed0d",
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.globals.set(\"salesforce_contact_id\", response.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "44ac652e-6d18-4898-b92a-0a7c47e5b9d9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\":\"David\",\r\n    \"LastName\":\"spoon\"\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Contact"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Body is correct\", function () {\r",
+									"   pm.expect(pm.response.json().Name).to.eql('David spoon')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "8b29bba3-1984-44e3-8d96-c1bbd85f3bde",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Contact/{{salesforce_contact_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "9f0a7d40-1b59-4d90-be33-06ad17de08f3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"MailingCity\":\"chennai\"\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Contact/{{salesforce_contact_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body is correct\", function () {\r",
+									"   pm.expect(pm.response.json().MailingCity).to.eql('chennai')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "aa030234-ccff-4e24-9a49-f21de6b79b8b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Contact/{{salesforce_contact_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"salesforce_contact_id\"));\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "e1c0838a-e94e-4475-93ec-631f88de3fa5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Contact"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "e3a3d57f-df42-43dd-9c97-4d2c1025eaee"
+		},
+		{
+			"name": "Lead",
+			"item": [
+				{
+					"name": "Create Lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "404d986f-511a-4ca7-9ff0-1130c503ed0d",
+								"exec": [
+									"var response = pm.response.json();\r",
+									"console.log(response)\r",
+									"console.log(response.id)\r",
+									"\r",
+									"pm.globals.set(\"salesforce_lead_id\", response.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "bee2a08d-f036-4be9-b5f6-6e5bfe194052",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"FirstName\":\"James\",\r\n    \"LastName\":\"spoon\",\r\n    \"Company\":\"Self\"\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Lead"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "80cedd13-edf8-4252-a017-0bf6d82a931a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Company\":\"India\"\r\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Lead/{{salesforce_lead_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body is correct\", function () {\r",
+									"   pm.expect(pm.response.json().Country).to.eql('India')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "f7a3e77f-696a-4e54-952f-cbb97af5f692",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Lead/{{salesforce_lead_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Lead",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "f435c28e-d8a2-423f-8911-d3a448eaf02b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Lead/{{salesforce_lead_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All leads",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "73207124-3559-4f52-9604-afd52fd00ba7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).not.to.include(pm.globals.get(\"salesforce_lead_id\"));\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "95b4d9d5-fe15-4432-ad7a-7ab335e6c009",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects/Lead"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "d0dbc9ec-1433-470e-9d2f-9d49940c3df5"
+		},
+		{
+			"name": "Utils",
+			"item": [
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fcf6584c-80ae-40b8-b04e-4bf9bbd4583b",
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.globals.set(\"salesforce_token\", response.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "cbaa8dc2-6ff5-4b36-b05e-ecc458340a09",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "3MVG9wt4IL4O5wvKCwDTaM4zhqMVdGtVPU6W1qJ3X5Kyku873xnLFYFaRqO9654Aja.cDeqnFnWROJ7I6UdSR",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "34469143ADA2270B45DC179BD6BF00BEA56E6A0F108718F9BFB6CCA3E300A043",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "apitestingjuly@testleaf.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Testleaf123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "https://login.salesforce.com/services/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"login",
+								"salesforce",
+								"com"
+							],
+							"path": [
+								"services",
+								"oauth2",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "3MVG9wt4IL4O5wvKCwDTaM4zhqMVdGtVPU6W1qJ3X5Kyku873xnLFYFaRqO9654Aja.cDeqnFnWROJ7I6UdSR",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "34469143ADA2270B45DC179BD6BF00BEA56E6A0F108718F9BFB6CCA3E300A043",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "apitestingjuly@testleaf.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "Testleaf@123",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Overall Objects List",
+					"_postman_id": "9f930606-a05a-4960-aa8e-424b74b91cec",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{salesforce_token}}",
+								"type": "text"
+							}
+						],
+						"url": "https://testleafcom3-dev-ed.my.salesforce.com/services/data/v22.0/sobjects"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "336f6472-7e3a-475b-b01a-cae3fcd7930d"
+		}
+	]
+}
