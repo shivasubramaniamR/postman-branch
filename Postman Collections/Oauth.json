@@ -692,7 +692,7 @@
 			"id": "eeab7b46-b3e5-4a36-8409-9063eed6d574"
 		},
 		{
-			"name": "New Folder",
+			"name": "Dummy GITHUB Integeration",
 			"item": [],
 			"id": "da8880f4-cb42-4957-94d0-f60892c8e72f"
 		}
@@ -728,13 +728,13 @@
 	],
 	"variable": [
 		{
-			"id": "a990dfd9-367b-4d3e-b5ba-beb19f263ee9",
+			"id": "a53b3316-9997-4a38-82b4-e25498d3d099",
 			"key": "table_name",
 			"value": "incident",
 			"type": "string"
 		},
 		{
-			"id": "94027180-3277-4fc0-80d7-2d08f12a5807",
+			"id": "6518252c-fa61-4644-b3df-3e0db5ccd4a4",
 			"key": "client_id",
 			"value": "78bf697b24b3011064f756607e1dfda4",
 			"type": "string"
