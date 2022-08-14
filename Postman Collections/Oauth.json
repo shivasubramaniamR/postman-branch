@@ -1,0 +1,750 @@
+{
+	"info": {
+		"_postman_id": "0aa5fdc5-c746-423f-a64a-502c99dcec8f",
+		"name": "ServiceNow OAuth July",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Incidents Oauth Method 1",
+			"item": [
+				{
+					"name": "Get all the records from Incidents",
+					"_postman_id": "af557e38-6136-4a8e-ad42-459bead8d4ae",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": {
+								"clientId": "058c582560dd1110c4ec681bb45d0cc1",
+								"authUrl": "https://dev115190.service-now.com/oauth_auth.do",
+								"redirect_uri": "https://oauth.pstmn.io/v1/callback",
+								"grant_type": "implicit",
+								"state": "dummy",
+								"scope": "useraccount",
+								"clientSecret": "nxLMl0wHBq4uQAy/GFvV7Q==",
+								"tokenType": "",
+								"client_authentication": "header",
+								"addTokenTo": "header",
+								"accessTokenUrl": "https://dev97354.service-now.com/oauth_token.do",
+								"tokenName": "Oauth2.0",
+								"password": "g>$rUiHP-bD;a&l^8^",
+								"username": "abraham.lincoln",
+								"useBrowser": false
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer DT8P2E0umZsjIYH0N3ZkDH2Hg23sctzIen-d6vgG7taYAleZMbB51Rx-oE-ZqBnfaJy4L8RpzmfY0kNXsDWFvQ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{server}}/api/now/table/{{table_name}}",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"{{table_name}}"
+							],
+							"query": [
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "software",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "bc089ef9-987a-46c7-a11b-adc096a0c4ba"
+		},
+		{
+			"name": "Incidents Oauth Method 2",
+			"item": [
+				{
+					"name": "Getting the Access Code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f3bcc241-55fd-4f32-9acc-97d75a47a4e1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4a73dc5-94de-48db-90e9-12bd67625c87",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "fc3377eb-f648-49fb-962f-342083254fcc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "scope",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "access_type",
+								"value": "offline",
+								"type": "text"
+							},
+							{
+								"key": "response_type",
+								"value": "code",
+								"type": "text"
+							},
+							{
+								"key": "redirect_uri",
+								"value": "https://oauth.pstmn.io/v1/callback",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "78bf697b24b3011064f756607e1dfda4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://dev115190.service-now.com/oauth_auth.do?response_type=code&redirect_uri=https://oauth.pstmn.io/v1/callback&client_id=058c582560dd1110c4ec681bb45d0cc1&state=123",
+							"protocol": "https",
+							"host": [
+								"dev115190",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"oauth_auth.do"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://oauth.pstmn.io/v1/callback"
+								},
+								{
+									"key": "client_id",
+									"value": "058c582560dd1110c4ec681bb45d0cc1"
+								},
+								{
+									"key": "state",
+									"value": "123"
+								},
+								{
+									"key": "category",
+									"value": "software",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Getting Refresh Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f3bcc241-55fd-4f32-9acc-97d75a47a4e1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4a73dc5-94de-48db-90e9-12bd67625c87",
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var referesh_token = response.refresh_token;\r",
+									"\r",
+									"pm.globals.set(\"refresh_token\", referesh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "278083d5-eca4-4fc5-a6a7-2111f1342f4c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "scope",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "access_type",
+								"value": "offline",
+								"type": "text"
+							},
+							{
+								"key": "response_type",
+								"value": "code",
+								"type": "text"
+							},
+							{
+								"key": "redirect_uri",
+								"value": "https://oauth.pstmn.io/v1/callback",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "78bf697b24b3011064f756607e1dfda4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "rNFkkJ4zL3A7tPmeDOmWWfRYDFgRC1aA_JVoiQ79tYZhXPFbznbPUkxGvMnzTU1KCPbyB_d6wFnc8s_S7-zfRw",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://oauth.pstmn.io/v1/callback",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "058c582560dd1110c4ec681bb45d0cc1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Admin@123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "https://dev115190.service-now.com/oauth_token.do",
+							"protocol": "https",
+							"host": [
+								"dev115190",
+								"service-now",
+								"com"
+							],
+							"path": [
+								"oauth_token.do"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"disabled": true
+								},
+								{
+									"key": "code",
+									"value": "smSi02ps45UlCUXU5609XeUzl2VHN5wdD7hhKRwI4Yces62i7jqAQJgZaTW9m6fQZ_8tEVqMIpNiUJTclImnNQ",
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://oauth.pstmn.io/v1/callback",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "78bf697b24b3011064f756607e1dfda4",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "admin",
+									"disabled": true
+								},
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "software",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Getting the Access Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f3bcc241-55fd-4f32-9acc-97d75a47a4e1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4a73dc5-94de-48db-90e9-12bd67625c87",
+								"exec": [
+									"console.log(pm.response.json().access_token)\r",
+									"pm.globals.set(\"access_token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "8ec79ac7-7c78-495c-abfa-97d22c220be5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "sampleOauth",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": ";.-gn^d83vB@]51O%bB#$+MrY4X$PSGi.^:$?L,OeV3zn000KYK?$g}qW;),udN[hrfH!+u4*GUp}$g6,",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "058c582560dd1110c4ec681bb45d0cc1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Admin@123",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "cmiw0r4VVT5vDNSFirhoUzW2SQ4tJT1XlS72gkyst1PrOP_Ng8iVsl1K7wWzuTqgg4TvLJ8OedAFbabG_5ZCyQ",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{server}}/oauth_token.do",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"oauth_token.do"
+							],
+							"query": [
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "software",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incident Details",
+					"_postman_id": "ae97cae5-46e0-49c0-b1f3-92c4a4502607",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "09ep078wQkKasUlETCtarIS1gopjMTiEYu3rfF_ntmjQwoWgOKhgY3KXWwEpvPBl3VwZM2olqvghD8fnSZBE6w"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{server}}/api/now/table/incident",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"incident"
+							],
+							"query": [
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "1025a972-fe2f-4429-b467-b888d84aa0c1"
+		},
+		{
+			"name": "Incidents Oauth Method 3",
+			"item": [
+				{
+					"name": "Getting Refresh Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f3bcc241-55fd-4f32-9acc-97d75a47a4e1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4a73dc5-94de-48db-90e9-12bd67625c87",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "4a39e10e-43d4-473b-bb52-792ef286d27f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "abraham.lincoln",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "mjj+pP_R92(Ht@xGRh:m7XcLyN[@2qgOMQd3@1,0eeV<1)OBie-:O7A,3m)[KWZ&AD+j>iS",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "058c582560dd1110c4ec681bb45d0cc1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Admin@123",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{server}}/oauth_token.do",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"oauth_token.do"
+							],
+							"query": [
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "software",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Access Token generation from Refresh Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f3bcc241-55fd-4f32-9acc-97d75a47a4e1",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c4a73dc5-94de-48db-90e9-12bd67625c87",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "8c023366-841d-4a22-b9d2-8587754f72d3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "sampleOauth",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": ";.-gn^d83vB@]51O%bB#$+MrY4X$PSGi.^:$?L,OeV3zn000KYK?$g}qW;),udN[hrfH!+u4*GUp}$g6,",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "client_id",
+									"value": "058c582560dd1110c4ec681bb45d0cc1",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Admin@123",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "JjNM_UDZEnMa5dDarKOKH7CujYWxSa24pSFegW9qUkYdcKubcQRQzN8uowdYbJFTRX1o1rbQ51F5ZLBOM1tOEw",
+									"type": "text"
+								}
+							],
+							"options": {
+								"urlencoded": {}
+							}
+						},
+						"url": {
+							"raw": "https://{{server}}/oauth_token.do",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"oauth_token.do"
+							],
+							"query": [
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "software",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Incident",
+					"_postman_id": "16d0f241-9bee-4476-835a-d586015800c5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "e4BFFs1cb5_7FkiCsoLsv35cQ-feqs6YLTgJB0lBt17gIfzQBVKoete-SPyZOQt6maiqSkGjKyy0W_z09ORa7w"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://{{server}}/api/now/table/incident",
+							"protocol": "https",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"api",
+								"now",
+								"table",
+								"incident"
+							],
+							"query": [
+								{
+									"key": "sysparm_fields",
+									"value": "number,sys_id",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "eeab7b46-b3e5-4a36-8409-9063eed6d574"
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": {
+			"password": "v*CJ@eHh3Ls1",
+			"username": "admin"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ac9e2bd6-69c2-4632-9856-579a49f5b7fa",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e763731a-468e-4ef3-99bb-0901cf4791b4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d8ec476a-bf88-4673-b4b4-8ce31e430738",
+			"key": "table_name",
+			"value": "incident",
+			"type": "string"
+		},
+		{
+			"id": "33a535b0-e40b-4230-be55-eb207649f0ec",
+			"key": "client_id",
+			"value": "78bf697b24b3011064f756607e1dfda4",
+			"type": "string"
+		}
+	]
+}
